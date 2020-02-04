@@ -48,7 +48,7 @@
     "mocha": "^2.4.5",
     "webpack": "^1.12.13",
     "webpack-dashboard": "^0.2.1",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^3.1.11"
   },
   "directories": {
     "test": "test"
