@@ -1,4 +1,5 @@
-import ZingTouch from 'zingtouch';
+let ZingTouch = require('zingtouch');
+
 
 let zt = new ZingTouch.Region(document.body);
 
