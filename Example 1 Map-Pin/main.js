@@ -1,1 +1,1 @@
-
+import ZingTouch from 'zingtouch';
