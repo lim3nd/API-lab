@@ -1,4 +1,21 @@
-* {
+body {
     margin: 0;
     padding: 0;
+    height: 582px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#pin {
+    width: 50px;
+    position: relative;
+}
+#pin:hover {
+    width: 55px;
+}
+
+#the-map {
+    width: 400px;
+
 }
