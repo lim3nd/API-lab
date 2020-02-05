@@ -1,21 +1,25 @@
-body {
-    margin: 0;
-    padding: 0;
-    height: 582px;
-
+* {
+    margin: 0px;
+    padding: 0px
+}
+.wrapper {
+    height: 100vh;
+   
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
 }
-#pin {
-    width: 50px;
-    position: relative;
-}
-#pin:hover {
-    width: 55px;
-}
-
-#the-map {
+#parent {
     width: 400px;
+    height: 400px;
 
+    position: relative;
+
+    background-image: url(./assets/map.jpg);
+}
+#child {
+    position: relative;    
+}  
+#child img {
+    width: 50px;
 }
