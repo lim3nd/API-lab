@@ -1,0 +1,7 @@
+FIRST:
+Download GitHub Desktop for either Windows or Mac.
+
+Then install it and log in to your GitHub account, in order to be able to see the projects 
+your account has access to (in this case API-lab).
+
+Now follow the image-instructions.
