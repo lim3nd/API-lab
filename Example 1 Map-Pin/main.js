@@ -1,31 +1,31 @@
 //Set the pin position
-let currentX = document.getElementById("child").style.left = 200;
-document.getElementById("child").style.top = 200;
-
-
+//let currentX = document.getElementById("child").style.left = 200;
+//document.getElementById("child").style.top = 200;
 
 var region = new ZingTouch.Region(document.getElementById('parent'));
 var target = document.getElementById('child');
 
-region.bind(target, 'pan', function(e){
-    let xPos = e.detail.events[0].x;
-    let yPos = e.detail.events[0].y;
+function getDiff() {
+    let mapWidth = 400;
+  
+    let diff = {
+        xDiff: (window.innerWidth - mapWidth)/2,
+        yDiff: (window.innerHeight - mapWidth)/2,
+    }
+    return diff;
+}
 
-    console.log(e.detail.events[0]);
-    //console.log(`X = ${xPos} / Y = ${yPos}`)
+
+region.bind(target, 'pan', function(e){
+
+    let xPos = e.detail.events[0].x - getDiff().xDiff;
+    //detail.data[0].changeX???
+    let yPos = e.detail.events[0].y - getDiff().yDiff;;
+    
+    let posdata = "translate(" + xPos + "px, " + yPos + "px)";
+
+    console.log(posdata);
+
+    target.style.transform = posdata;
 })
 
-//let currentposx = document.getElementById('child').style;
-    //let leftY = event.detail.data[0].distanceFromOrigin;
-    //let newPos = currentX + leftY;
-
-    //console.log(newPos);
-    
-
-    //document.getElementById("child").style.left = newPos;
-    //currentX = newPos;
-
-
-    //let x = e.x
-  //move element
-    //target.style.left = currentposx

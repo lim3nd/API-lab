@@ -1,5 +1,6 @@
 const region = new ZingTouch.Region(document.body);
 const myRotateElement = document.getElementById("my-rotate");
+const car = document.getElementById("car");
 let angle = 0;
 let currentRotateEventAngle = 0;
 region.bind(
@@ -16,6 +17,7 @@ region.bind(
     currentRotateEventAngle = rotateEventAngle;
 
     myRotateElement.style.transform = `rotate(${-angle}deg)`;
+    car.style.transform = `rotate(${-angle / 3}deg)`;
   },
   false
 );
