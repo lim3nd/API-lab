@@ -1,4 +1,32 @@
-.color-space {
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+  
+
+.color-picker,
+.color-wheel,
+.color-point {
     width: 400px;
     height: 400px;
+}
+
+.color-picker {
+    position: relative;
+}
+
+.color-wheel,
+.color-point {
+    position: absolute;
+    padding-top: 15px;
+}
+
+.color-point {
+    text-align: center;
+    padding: 2em;
+    color: black;
+    font-size: 80px;
+    padding-top: 0px;
 }

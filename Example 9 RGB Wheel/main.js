@@ -1,6 +1,6 @@
 function ColorPickerWheel(element) {
     this.element = element;
-
+    
     this.init = function() {
         var diameter = this.element.offsetWidth;
 
@@ -13,9 +13,9 @@ function ColorPickerWheel(element) {
 
         element.appendChild(canvas);
 
-        this.setupBindings();
+        //this.setupBindings();
 
-        this.renderColorPicker();
+        //this.renderColorPicker();
     };
 
     this.renderColorPicker = function() {
@@ -82,7 +82,8 @@ function ColorPickerWheel(element) {
             var y = e.offsetY || e.clientY - this.offsetTop;
 
             var imgData = ctx.getImageData(x, y, 1, 1).data;
-            var selectedColor = new Color(imgData[0], imgData[1], imgData[2]);
+            console.log(imgData[0], imgData[1], imgData[2])
+            //var selectedColor = new Color(imgData[0], imgData[1], imgData[2]);
             // do something with this
 
             self.renderMouseCircle(x, y);
@@ -92,4 +93,45 @@ function ColorPickerWheel(element) {
     this.init();
 }
 
-new ColorPickerWheel(document.querySelector('.color-space'));
+
+
+function initRotatingPicker() {
+
+    var currentAngle = 15;
+document.getElementById('color-point').style.transform = 'rotate(15deg)';
+
+var target = document.getElementById('color-picker');
+var region = new ZingTouch.Region(target);
+
+region.bind(target, 'rotate', function(e) {
+  var rotatable = document.getElementById('color-point');
+  currentAngle += e.detail.distanceFromLast;
+  rotatable.style.transform = 'rotate(' + currentAngle + 'deg)';
+
+  setOutput([
+    ['Gesture', 'Rotate'],
+    ['angle', Math.floor(e.detail.angle) + "°"],
+    ['distanceFromOrigin', Math.floor(e.detail.distanceFromOrigin) + "°"],
+    ['distanceFromLast', Math.floor(e.detail.distanceFromLast) + "°"]
+  ]);
+
+});
+
+function setOutput(data) {
+  var outputStr = "> ";
+  for (var i = 0; i < data.length; i++) {
+    outputStr += data[i][0] + ": " + data[i][1] + ((i === data.length - 1) ? '' : ' , ');
+  }
+  var output = document.getElementById('output');
+  output.innerHTML = outputStr;
+}
+
+  
+}
+
+function init() {
+    new ColorPickerWheel(document.querySelector('.color-wheel'));
+    initRotatingPicker();
+}
+
+window.onload = init;
