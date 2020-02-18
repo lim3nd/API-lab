@@ -1,74 +1,60 @@
-console.log("Running....");
-
-//document.body.onload = createObject;
 let x = 0;
 let y = 0;
-
+let check = false;
+let destX = 0;
+let destY = 0;
+let destWidth = 0;
+let destHeight = 0;
+let objX = 0;
+let objY = 0;
+let objWidth = 0;
+let objHeight = 0;
+let counter = 0;
+let slot1 = false;
+let slotLock = false;
+let slotItem;
+let savedArray = [];
 
 const activeRegion = new ZingTouch.Region(document.body);
-const childElement = document.getElementById('dragObj1');
+let childElement1 = document.getElementById('dragObj1');
+let touchArea = document.getElementById("toucharea");
 const pan = new ZingTouch.Pan({
   treshold: 0
 
 });
 
-//const pan = new ZingTouch.Pan();
-
-/*
-const canvas = document.getElementById("graphics");
-canvas.width = document.documentElement.clientWidth;
-canvas.height = document.documentElement.clientHeight;
-const ctx = canvas.getContext("2d");
-*/
-
-let obj1 = dragObj1.getBoundingClientRect();
-console.log(obj1);
-let objX = obj1.x;
-let objY = obj1.y;
-let objWidth = obj1.width;
-let objHeight = obj1.height;
-console.log("X: " + objX + ", Y: " + objY + ", Width: " + objWidth + ", Height: " + objHeight);
-
-let destinationObj = container.getBoundingClientRect();
-let destX = destinationObj.x;
-let destY = destinationObj.y;
-let destWidth = destinationObj.width;
-let destHeight = destinationObj.height;
-console.log("X: " + destX + ", Y:" + destY + ", Width: " + destWidth + ", Height: " + destHeight);
-
-
-
-
-window.onresize = function(){
+function getPos(){
+  childElement1 = document.getElementById('dragObj1');
   obj1 = dragObj1.getBoundingClientRect();
-  console.log(obj1);
   objX = obj1.x;
   objY = obj1.y;
   objWidth = obj1.width;
   objHeight = obj1.height;
-  console.log("X: " + objX + ", Y: " + objY + ", Width: " + objWidth + ", Height: " + objHeight);
+
+  let destinationObj = container.getBoundingClientRect();
+  destX = destinationObj.x;
+  destY = destinationObj.y;
+  destWidth = destinationObj.width;
+  destHeight = destinationObj.height;
+}
+
+getPos();
+
+
+window.onresize = function(){
+  obj1 = dragObj1.getBoundingClientRect();
+  objX = obj1.x;
+  objY = obj1.y;
+  objWidth = obj1.width;
+  objHeight = obj1.height;
 
   destinationObj = container.getBoundingClientRect();
   destX = destinationObj.x;
   destY = destinationObj.y;
   destWidth = destinationObj.width;
   destHeight = destinationObj.height;
-  console.log("X: " + destX + ", Y:" + destY + ", Width: " + destWidth + ", Height: " + destHeight);
+}
 
-
-}
-function travelDistX(){
-  let obj = childElement.getBoundingClientRect();
-  let posX = obj.x;
-  let trvX = destX - posX;
-  return trvX;
-}
-function travelDistY(){
-  let obj = childElement.getBoundingClientRect();
-  let posY = obj.y;
-  let trvY = destY - posY;
-  return trvY;
-}
 
 function objectX(){
   let o = dragObj1.getBoundingClientRect();
@@ -81,29 +67,56 @@ function objectY(){
   let objPosY = o.y;
   return objPosY;
 }
+function checkPos(){
+  if(objectX() >=(destX) && objectY() >= (destY)){
+    check = true;
+    return check;
+  }
+}
+function newPosX(){
+  x += x;
+  let newX = objX + x;
+  return newX;
+}
+function newPosY(){
+  y += y;
+  let newY = objY + y;
+  return newY;
+}
+function slot(){
+  if(slot1 === true && slotLock === false){
+    counter++;
+    document.getElementById('output').innerHTML = counter; 
+    slotLock = true;
+    savedArray.push("item1");
+  }
+}
 
-console.log(travelDistX(), + " " + travelDistY());
-console.log(childElement.directionFromOrigin);
 
-activeRegion.bind(childElement, pan, function(event){
-  //if(objectX() <=destX && objectY() <= destY){
-    console.log(event.detail);
-    x += event.detail.data[0].change.x;
-    y += event.detail.data[0].change.y;
+activeRegion.bind(touchArea, pan, function (event){
+  x += event.detail.data[0].change.x;
+  y += event.detail.data[0].change.y;
+  childElement1.style.left = `${x}px`;
+  childElement1.style.top = `${y}px`;
 
-    
-    //activeRegion.style.transform = "touch-action: pan-x, pan-y";
-    //childElement.style.transform = 'pan';
-    
-    childElement.style.left = `${x}px`;
-    childElement.style.top = `${y}px`;
-    //console.log(objectX() + " " + objectY());
-    //console.log(destX + " " + destY);
-  //}else{
-    //childElement.style.display = "none";
-  //}
+  if(checkPos() === true){      
+      childElement1.style.visibility = "hidden";
+      slot1 = true;
+      slot();
+    }
 }, false);
 
-/*
-if travelDistX/travelDistY === Math.tan(childElement.directionFromOrigin)
-*/
+let dropArea = document.getElementById("container");
+dropArea.addEventListener("click", function(event){
+  if((objectX() >= destX) && (objectY() <= (destX + destWidth)) && (objectY() >= destY) && (objectY()) <= (destY+destHeight)){
+    childElement1.style.left = "8px";
+    childElement1.style.top = "8px";
+    childElement1.style.visibility = "visible";
+    getPos();
+    check = false;
+    slot1 = true;
+    slotLock = false;
+    x=0;
+    y=0;
+  }
+});
