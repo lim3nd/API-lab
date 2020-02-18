@@ -3,10 +3,11 @@ console.log("Running....");
 //document.body.onload = createObject;
 let x = 0;
 let y = 0;
-
+let check = false;
 
 const activeRegion = new ZingTouch.Region(document.body);
-const childElement = document.getElementById('dragObj1');
+let childElement1 = document.getElementById('dragObj1');
+let touchArea = document.getElementById("toucharea");
 const pan = new ZingTouch.Pan({
   treshold: 0
 
@@ -58,13 +59,13 @@ window.onresize = function(){
 
 }
 function travelDistX(){
-  let obj = childElement.getBoundingClientRect();
+  let obj = childElement1.getBoundingClientRect();
   let posX = obj.x;
   let trvX = destX - posX;
   return trvX;
 }
 function travelDistY(){
-  let obj = childElement.getBoundingClientRect();
+  let obj = childElement1.getBoundingClientRect();
   let posY = obj.y;
   let trvY = destY - posY;
   return trvY;
@@ -81,29 +82,52 @@ function objectY(){
   let objPosY = o.y;
   return objPosY;
 }
+function checkPos(){
+  if(objectX() >=(destX) && objectY() >= (destY)){
+    childElement1.style.visibility = "hidden";
+  }
+}
 
 console.log(travelDistX(), + " " + travelDistY());
-console.log(childElement.directionFromOrigin);
+console.log(childElement1.directionFromOrigin);
 
-activeRegion.bind(childElement, pan, function(event){
-  //if(objectX() <=destX && objectY() <= destY){
+activeRegion.bind(touchArea, pan, function (event){
     console.log(event.detail);
     x += event.detail.data[0].change.x;
     y += event.detail.data[0].change.y;
-
-    
+  
+      
     //activeRegion.style.transform = "touch-action: pan-x, pan-y";
     //childElement.style.transform = 'pan';
-    
-    childElement.style.left = `${x}px`;
-    childElement.style.top = `${y}px`;
+      
+    childElement1.style.left = `${x}px`;
+    childElement1.style.top = `${y}px`;
+      
     //console.log(objectX() + " " + objectY());
     //console.log(destX + " " + destY);
-  //}else{
-    //childElement.style.display = "none";
-  //}
+
+    //objectX() >=(destX) && objectY() >= (destY)
+    //childElement1.style.display = "none";
+    checkPos();
 }, false);
 
-/*
-if travelDistX/travelDistY === Math.tan(childElement.directionFromOrigin)
-*/
+let dropArea = document.getElementById("container");
+dropArea.addEventListener("click", function(event){
+  console.log(objectX() + ", " + destX);
+  console.log(objectY() + ", " + destY);
+  if(objectX() == 0 && objectY() == 0){
+    childElement1.style.left = "8px";
+    childElement1.style.top = "8px";
+    childElement1.style.visibility = "visible"
+    childElement1.style.backgroundColor = "rgb(148, 164, 228)";
+    childElement1.style.width = "100px";
+    childElement1.style.height = "100px";
+    console.log("Check")
+    /*background-color: rgb(148, 164, 228);
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 50%; */
+  }
+
+});
