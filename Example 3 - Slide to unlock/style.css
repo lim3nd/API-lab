@@ -1,5 +1,5 @@
 * {
-    background-color: #012e33;
+    background-color: white;
 }
 
 body {
@@ -16,13 +16,19 @@ body {
     width: 25em;
     height: 6em;
 
-    background-color: #025159;
+    background-color: #EBEBEB
+    ;
     border-radius: 1.2em;
+
+    transition: all 1s ease 0s;
+
+    /* Make sure the slider fades in, start at 0 opacity then main.js fades in to opacity 1*/
+    opacity: 0;
 }
 .container h1 {
     background: none;
-    color: white;
-    opacity: 0.5;
+    color: rgb(142, 142, 142);
+    opacity: 1;
 
     font-family: sans-serif;
     font-weight: 200;
@@ -41,18 +47,9 @@ body {
 
     margin-left: 7px;
 
-    background-color: #F27405;
+    background-color: #2F2F2F;
 
     border-radius: 0.75em;
 
     transition: all 1s ease 0s;
-}
-#arrow img {
-    margin: 4px;
-}
-
-#arrow:hover {
-    margin-left: 200px;
-
-
 }
