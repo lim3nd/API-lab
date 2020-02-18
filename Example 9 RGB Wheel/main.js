@@ -1,66 +1,5 @@
-function ColorPickerWheel(element) {
-    this.element = element;
-    
-    this.init = function() {
-        var diameter = this.element.offsetWidth;
-
-        var canvas = document.createElement('canvas');
-        canvas.height = diameter;
-        canvas.width = diameter,
-        this.canvas = canvas;
-
-        this.renderColorMap();
-
-        element.appendChild(canvas);
-
-        //this.setupBindings();
-
-        //this.renderColorPicker();
-    };
-
-    this.renderColorPicker = function() {
-        var canvas = this.canvas;
-        var ctx = canvas.getContext('2d');
-
-        ctx.fillStyle = 'rgb(0, 0, 0)';
-        ctx.beginPath();
-        ctx.arc(150, 150, 50 * 0.8, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-
-    }
-
-    this.renderColorMap = function() {
-        var canvas = this.canvas;
-        var ctx = canvas.getContext('2d');
-
-        var radius = canvas.width / 2;
-        var toRad = (2 * Math.PI) / 360;
-        var step = 1 / radius;
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for(var i = 0; i < 360; i += step) {
-            var rad = i * toRad;
-            ctx.strokeStyle = 'hsl(' + i + ', 100%, 50%)';
-            ctx.beginPath();
-            ctx.moveTo(radius, radius);
-            ctx.lineTo(radius + radius * Math.cos(rad), radius + radius * Math.sin(rad));
-            ctx.stroke();
-        }
-
-        // White Circle
-
-        ctx.fillStyle = 'rgb(255, 255, 255)';
-        ctx.beginPath();
-        ctx.arc(radius, radius, 150 * 0.8, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-        
-        // render the rainbow box here ----------
-    };
-
-    this.renderMouseCircle = function(x, y) {
+ /*
+ this.renderMouseCircle = function(x, y) {
         var canvas = this.canvas;
         var ctx = canvas.getContext('2d');
 
@@ -83,30 +22,27 @@ function ColorPickerWheel(element) {
 
             var imgData = ctx.getImageData(x, y, 1, 1).data;
             console.log(imgData[0], imgData[1], imgData[2])
-            //var selectedColor = new Color(imgData[0], imgData[1], imgData[2]);
-            // do something with this
-
             self.renderMouseCircle(x, y);
         }, false);
     };
 
-    this.init();
-}
-
-
-
 function initRotatingPicker() {
 
     var currentAngle = 15;
-document.getElementById('color-point').style.transform = 'rotate(15deg)';
+let object = document.getElementById('color-point');
+object.style.transform = 'rotate(15deg)';
 
-var target = document.getElementById('color-picker');
-var region = new ZingTouch.Region(target);
+*/
+const region = new ZingTouch.Region(document.body);
+const target = document.getElementById('color-point');
+
 
 region.bind(target, 'rotate', function(e) {
-  var rotatable = document.getElementById('color-point');
-  currentAngle += e.detail.distanceFromLast;
-  rotatable.style.transform = 'rotate(' + currentAngle + 'deg)';
+    console.log(e.detail)
+ 
+  currentAngle += e.detail.angle;
+  target.style.transform = `rotate(${S}deg)`;
+  console.log("rotating");
 
   setOutput([
     ['Gesture', 'Rotate'],
@@ -115,8 +51,8 @@ region.bind(target, 'rotate', function(e) {
     ['distanceFromLast', Math.floor(e.detail.distanceFromLast) + "°"]
   ]);
 
-});
-
+}, false);
+/*
 function setOutput(data) {
   var outputStr = "> ";
   for (var i = 0; i < data.length; i++) {
@@ -128,10 +64,4 @@ function setOutput(data) {
 
   
 }
-
-function init() {
-    new ColorPickerWheel(document.querySelector('.color-wheel'));
-    initRotatingPicker();
-}
-
-window.onload = init;
+*/
