@@ -3,7 +3,7 @@
     padding: 0px
 }
 .wrapper {
-    height: 100vh;
+    height: 80vh;
    
     display: flex;
     justify-content: center; 
@@ -18,8 +18,12 @@
     background-image: url(./assets/map.jpg);
 }
 #child {
-    position: relative;    
+    position: relative; 
 }  
-#child img {
-    width: 50px;
+
+#debug {
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
