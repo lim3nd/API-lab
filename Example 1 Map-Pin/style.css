@@ -4,22 +4,23 @@
 }
 .wrapper {
     height: 100vh;
-   
     display: flex;
     justify-content: center; 
     align-items: center;
+
+    background-color: rgb(27, 27, 28);
 }
 #parent {
-    width: 400px;
-    height: 400px;
-
     position: relative;
-
-    background-image: url(./assets/map.jpg);
+    background-image: url(./assets/map.png);
 }
 #child {
-    position: relative;    
+    position: relative; 
 }  
-#child img {
-    width: 50px;
+
+#debug {
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+    visibility: hidden;
 }
