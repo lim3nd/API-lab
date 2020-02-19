@@ -1,0 +1,23 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid;
+}
+img {
+  max-width: 100%;
+}
+.knob {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.knob img {
+  max-width: 120px;
+}
+
+.bulb {
+  flex: 1;
+}
