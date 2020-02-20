@@ -6,7 +6,7 @@ let slider = document.getElementById("arrow");
 setTimeout(function() {
     document.getElementsByClassName("container")[0].style.opacity = 1;
 }, 500);
-
+ 
 function moveSlider(movement) {
     //accepted range of movement 
     if (movement > 7 && movement < 312) {
@@ -40,3 +40,15 @@ region.bind(parent, 'swipe', function(e){
     console.log(e.target.offsetLeft);
     //moveSlider(e.target.offsetLeft);
 }, false);
+
+
+//Debugging
+let action = {
+    unlock() {
+        moveSlider(500);
+    },
+    reset() {
+        startOver();
+
+    },
+};
