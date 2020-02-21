@@ -16,8 +16,8 @@ region.bind(
     }
     currentRotateEventAngle = rotateEventAngle;
 
-    myRotateElement.style.transform = `rotate(${-angle}deg)`;
-    car.style.transform = `rotate(${-angle / 3}deg)`;
+    myRotateElement.style.setProperty("transform", `rotate(${-angle}deg)`);
+    car.style.setProperty("transform", `rotate(${-angle / 3}deg)`);
   },
   false
 );
