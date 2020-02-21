@@ -5,8 +5,8 @@ const pointer = document.getElementById("pointer");
 let currentRotateEventAngle = 0;
 let angle = 0;
 
-region.bind(
-
+region.bind( 
+ 
   rotatableElement, "rotate", function(e) {
 
     console.log(e.detail);
