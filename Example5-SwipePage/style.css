@@ -3,21 +3,29 @@ body{
     color:rgb(50, 50, 50);
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
+
 }
 
 #touch-area{
-    height: 100vh;
+    height: 90vh;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 2%;
+    margin-top: 2%;
     background-color: rgb(230, 230, 230);
 }
 #text-area{
-    height: 100vh;
-    font-size: 1rem;
+    height: 80vh;
+    font-size: 1.5rem;
     margin-left: 5%;
     margin-right: 5%;
     
 }
 h1{
     text-align: center;
+    font-size: 2rem;
+}
+#number{
+    color: rgb(192, 4, 4);
+    position: sticky;
 }
