@@ -12,8 +12,8 @@ body{
   position: absolute;
   border-radius: 50%; 
   border: solid;
-  border-width: 0px;
-  border-color: rgb(212, 216, 238);
+  border-width: 2px;
+  border-color: rgb(148, 164, 228);
   width: 100px;
   height: 100px;
 }
