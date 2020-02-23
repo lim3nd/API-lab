@@ -14,14 +14,21 @@ let slot1 = false;
 let slotLock = false;
 let slotItem;
 let savedArray = [];
+let originalPosX = 0;
+let originalPosY = 0;
 
 const activeRegion = new ZingTouch.Region(document.body);
 let childElement1 = document.getElementById('dragObj1');
 let touchArea = document.getElementById("toucharea");
 const pan = new ZingTouch.Pan({
-  treshold: 0
-
+  numInputs: 1,
+  treshold: 0  
 });
+let destinationObj = container.getBoundingClientRect();
+let obj1 = childElement1.getBoundingClientRect();
+originalPosX = obj1.x;
+originalPosY = obj1.y;
+
 
 function getPos(){
   childElement1 = document.getElementById('dragObj1');
@@ -31,7 +38,7 @@ function getPos(){
   objWidth = obj1.width;
   objHeight = obj1.height;
 
-  let destinationObj = container.getBoundingClientRect();
+  destinationObj = container.getBoundingClientRect();
   destX = destinationObj.x;
   destY = destinationObj.y;
   destWidth = destinationObj.width;
@@ -68,7 +75,7 @@ function objectY(){
   return objPosY;
 }
 function checkPos(){
-  if(objectX() >=(destX) && objectY() >= (destY)){
+  if((objectX() >= destX) && (objectY() <= (destX + destWidth)) && (objectY() >= destY) && (objectY()) <= (destY+destHeight)){
     check = true;
     return check;
   }
@@ -86,37 +93,67 @@ function newPosY(){
 function slot(){
   if(slot1 === true && slotLock === false){
     counter++;
-    document.getElementById('output').innerHTML = counter; 
+    document.getElementById('output').innerHTML = "Object saved!"; 
     slotLock = true;
     savedArray.push("item1");
   }
 }
-
-
-activeRegion.bind(touchArea, pan, function (event){
-  x += event.detail.data[0].change.x;
-  y += event.detail.data[0].change.y;
-  childElement1.style.left = `${x}px`;
-  childElement1.style.top = `${y}px`;
-
+function checkActive(){
   if(checkPos() === true){      
       childElement1.style.visibility = "hidden";
       slot1 = true;
       slot();
-    }
+  }else{
+      childElement1.style.left = originalPosX + "px";
+      childElement1.style.top = originalPosY + "px";
+  }
+}
+
+
+
+activeRegion.bind(touchArea, pan, function (event){
+    childElement1.style.borderColor = "white";
+    console.log(event.detail);
+    x += event.detail.data[0].change.x;
+    y += event.detail.data[0].change.y;
+    childElement1.style.left = `${x}px`;
+    childElement1.style.top = `${y}px`;
+    console.log(pan.numInputs);
+    console.log(originalPosX + " " + originalPosY);
+    
 }, false);
 
 let dropArea = document.getElementById("container");
-dropArea.addEventListener("click", function(event){
+dropArea.addEventListener("click", function(event){  
   if((objectX() >= destX) && (objectY() <= (destX + destWidth)) && (objectY() >= destY) && (objectY()) <= (destY+destHeight)){
-    childElement1.style.left = "8px";
-    childElement1.style.top = "8px";
-    childElement1.style.visibility = "visible";
+    console.log(originalPosX + " " + originalPosY);
+    childElement1.style.left = (originalPosX/2) + "px";
+    childElement1.style.top = (originalPosY/2) + "px";
     getPos();
     check = false;
     slot1 = true;
     slotLock = false;
-    x=0;
-    y=0;
+    x = 0;
+    y = 0;
+    document.getElementById('output').innerHTML = ""; 
+    childElement1.style.visibility = "visible";
+  }
+});
+
+touchArea.addEventListener("mouseup", function(event){
+  childElement1.style.borderColor = "rgb(146, 148, 165)";
+  if(checkPos() === true){      
+    childElement1.style.visibility = "hidden";
+    slot1 = true;
+    slot();
+    x = 0;
+    y = 0;
+  }else{
+    childElement1.style.left = (originalPosX/2) + "px";
+    childElement1.style.top = (originalPosY/2) + "px";
+    x = 0;
+    y = 0;
+    console.log(originalPosX + " " + originalPosY);
+    console.log(childElement1.getBoundingClientRect());
   }
 });
