@@ -1,15 +1,21 @@
+//Variables
 let pageCounter = 0;
-
 const activeRegion = new ZingTouch.Region(document.body);
 let touchArea = document.getElementById("touch-area");
 let pageNumber = document.getElementById("number");
 let headLine = document.getElementById("headline");
 let text = document.getElementById("text");
+
+//Creates custom swipe object with lower escapeVelocity than standard
 const swipe = new ZingTouch.Swipe({
   escapeVelocity: 0.05,
   maxRestTime: 100  
 });
 
+/*
+  Function to change pages.
+  Conditional that checks the pageCounter variable, and changes text accordingly.
+*/
 function pageChanger(){
   if(pageCounter == 0){
     pageNumber.innerHTML = "Page 1";
@@ -27,22 +33,24 @@ function pageChanger(){
   }
 }
 
+/*
+  Adds the swipe motion to touchArea. Condition to check which direction is swiped.
+  Right to left: Go to next page
+  Left to right: Go to previous page.
+  Swiping up 45 degrees or down 45 degrees from origin is still recognized.
+  Checks the value of pageCounter and adds or subtracts.
+  Calls pageChanger method.
+*/
 activeRegion.bind(touchArea, swipe, function(event){
-    console.log(event.detail);
-    console.log(event.detail.data[0].currentDirection);
     if((315 <= event.detail.data[0].currentDirection && event.detail.data[0].currentDirection <= 360) || (0 <= event.detail.data[0].currentDirection && event.detail.data[0].currentDirection <= 45)){
       if(pageCounter >= 1){
-        console.log("minus")
         pageCounter--;
       }
-      console.log(pageCounter);
       pageChanger();
     }else if(135 <= event.detail.data[0].currentDirection <= 225){
       if(pageCounter < 2){
-        console.log("plus")
         pageCounter++;
       }
-      console.log(pageCounter);
       pageChanger();
     }
 });
