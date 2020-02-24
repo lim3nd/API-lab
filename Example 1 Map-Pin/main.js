@@ -1,65 +1,32 @@
-//Set the pin position
-//let currentX = document.getElementById("child").style.left = 200;
-//document.getElementById("child").style.top = 200;
-//
-/*
-var region = new ZingTouch.Region(document.getElementById('parent'));
-var target = document.getElementById('child');
-
-function getDiff() {
-    let mapWidth = 400;
-  
-    let diff = {
-        xDiff: (window.innerWidth - mapWidth)/2,
-        yDiff: (window.innerHeight - mapWidth)/2,
-    }
-    return diff;
-}
-
-
-region.bind(target, 'pan', function(e){
-
-    let xPos = e.detail.events[0].x - getDiff().xDiff;
-    //detail.data[0].changeX???
-    let yPos = e.detail.events[0].y - getDiff().yDiff;;
-    
-    let posdata = "translate(" + xPos + "px, " + yPos + "px)";
-
-    console.log(posdata);
-
-    target.style.transform = posdata;
-})
-
-*/
-
-//V2
-let parent = document.getElementById('parent');
-var region = new ZingTouch.Region(parent);
-var target = document.getElementById('child');
+//Set up
+let parent = document.getElementById('parent');     //Select the parent element 
+var region = new ZingTouch.Region(parent);          //Create a new region where the library listens
+var target = document.getElementById('child');      //Select the target element 
 
 //Set map size
 let mapWidth = document.getElementById('parent').style.width = "350px";
 let mapHeight = document.getElementById('parent').style.height = "400px";
 
-//Set pin size = 
+//Set pin size
 let pinSize = document.getElementById('pin').style.width = "50px";
 
-//Center pin
+//Center the pin
 let pinX = target.style.left = (parseInt(mapWidth)/2) - (parseInt(pinSize) / 2) + "px";
 let pinY = target.style.top = (parseInt(mapHeight)/2) - (parseInt(pinSize) / 1.5) + "px";
 
+//Function to get the offset caused by responsive window dimensions 
 function getOffset() {
-    let wi =  window.innerWidth - parseInt(mapWidth);
-    wi = Math.floor(wi/2);
-    let hi =  window.innerHeight - parseInt(mapHeight);
+    let wi =  window.innerWidth - parseInt(mapWidth);   //Windows width - the maps width parseInt removes the "px"
+    wi = Math.floor(wi/2);      //Get rid of decimals
+    let hi =  window.innerHeight - parseInt(mapHeight);     //Same as earlier but for height 
     hi = Math.floor(hi/2);
     
-    //Make sure they are not negative.......
-    if (wi < 0) {
-        wi = 0;
+    //Make sure they are not negative...
+    if (wi < 0) {       // If width is negative
+        wi = 0;         // Make width 0
     } 
-    if (hi < 0) {
-        hi = 0;
+    if (hi < 0) {       // If height is negative 
+        hi = 0;         // Make height 0
     } 
 
     //Export
@@ -67,9 +34,10 @@ function getOffset() {
         x: wi,
         y: hi,
     }
-    return offset;
+    return offset;      // Exports object named "offset", containing x and y values
 }
 
+//Function for moving the pin
 function movePin(x, y) {
     target.style.left = x - getOffset().x + "px";
     target.style.top = y - getOffset().y + "px"; 
@@ -78,9 +46,11 @@ function movePin(x, y) {
     document.getElementById("debug").innerHTML = "Pin position: x = " + parseInt(target.style.left) + "px, y = " + parseInt(target.style.top) + "px"; 
 }
 
+//Moving the pin, ZingTouch listens on parent element
 region.bind(parent, 'pan', function(e){
-    let xPos = e.detail.events[0].x;
+    let xPos = e.detail.events[0].x;        //Extract the coordinates
     let yPos = e.detail.events[0].y;
 
+    //Move the pin with new coordinates
     movePin(xPos, yPos);
 })
