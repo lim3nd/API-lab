@@ -24,20 +24,20 @@ So, using this as a prototyping tool is not optimal as it requires equal effort 
 However, some functions are useful. For example:
 
 * Tap
-** Pros: Easy addition of another input to trigger the event
-** Cons: Works as a normal mouse-click, dubble input only works on touch screens
+	** Pros: Easy addition of another input to trigger the event
+	** Cons: Works as a normal mouse-click, dubble input only works on touch screens
 
 * Swipe
-** Pros: Includes the use of velocity
-** Cons: Not easier to implement than already existing mouse events
+	** Pros: Includes the use of velocity
+	** Cons: Not easier to implement than already existing mouse events
 
 * Pan
-** Pros: change.x, change.y are nice tools
-** Cons: When gesture exits a touch area there is no “end” event, complicated to use
+	** Pros: change.x, change.y are nice tools
+	** Cons: When gesture exits a touch area there is no “end” event, complicated to use
 
 * Rotate
-** Pros: Easy implementation on touchscreens, the angle parameter is precise 
-** Cons: Rotation can not be attached to the object, only the mouse
+	** Pros: Easy implementation on touchscreens, the angle parameter is precise 
+	** Cons: Rotation can not be attached to the object, only the mouse
 
 * Distance - Requires multiple inputs, so we have not experimented with it.
 
