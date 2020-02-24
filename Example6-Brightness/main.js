@@ -55,9 +55,9 @@ canvasRegion.bind(canvas, 'swipe', function(e) {
   // not needed? /CG
   // bubbles[lastIndex].x = (x < 0) ? 0 : (x > canvasRect.width) ? canvasRect.width : x;
   // bubbles[lastIndex].y = (y < 0) ? 0 : (y > canvasRect.height) ? canvasRect.height : y;
-  var theta = Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
-  bubbles[lastIndex].vy = 0*-1 * (2 * (e.detail.data[0].velocity * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection)));
-  bubbles[lastIndex].vx = 0*2 * (e.detail.data[0].velocity * Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection));
+  // var theta = Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
+  // bubbles[lastIndex].vy = 0*-1 * (2 * (e.detail.data[0].velocity * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection)));
+  // bubbles[lastIndex].vx = 0*2 * (e.detail.data[0].velocity * Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection));
 });
 
 //PANNING
@@ -120,6 +120,11 @@ function getIndex(x, y) {
   y = Math.floor(y);
   var canvas = document.getElementById('picker-canvas');
   ctx = canvas.getContext('2d');
+
+  var ctx = canvas.getContext("2d");
+
+
+
   var colors = ctx.getImageData(x, y, 1, 1).data;
   var str = "";
   for (var i = 0; i < colors.length - 1; i++) {
@@ -138,7 +143,7 @@ var Bubble = function() {
   this.maxRadius = 50;
   this.stopped = false;
   this.grow = true;
-  this.color = 'rgba(' + getRandNum(0, 10) + ',' + getRandNum(0, 250) + ',' + getRandNum(100, 255) + ',' + 0.1   + ')';
+  this.color = 'rgba(' + getRandNum(0, 10) + ',' + getRandNum(0, 250) + ',' + getRandNum(100, 255) + ',' + 0.0   + ')';
   this.rate = getRandNum(0.1, 0.2, 1);
 };
 
@@ -163,7 +168,18 @@ Bubble.prototype = {
         context.arc(_this.x, _this.y, _this.radius, 0, 2 * Math.PI);
         context.fillStyle = 'rgba(' + color + ',1)';
         context.strokeStyle = 'rgba(' + color + ',1)';
-        console.log("width %: " + _this.x/canvas.width*100);
+
+        var multiplier = 100;
+
+        console.log("width %: " + _this.x/canvas.width*multiplier);
+        document.body.style.backgroundColor = "white";
+        var perc = "0." + Math.round(_this.x/canvas.width*multiplier);
+        if(_this.x/canvas.width*multiplier<9.5) {
+          perc= perc/10;
+        }
+        //console.log("perc: " + perc);
+        document.getElementById('container').style.backgroundColor = "black";
+        document.getElementById('container').style.opacity = 1-perc;
       } else {
         var color = arr.join(',');
         context.beginPath();
@@ -204,8 +220,8 @@ Bubble.prototype = {
     //MOVEMENT
     var canvas = document.getElementById('main-canvas');
     var canvasRect = canvas.getBoundingClientRect();
-    this.x = this.x + (this.vx * 1);
-    this.y = this.y + (this.vy * 1);
+    // this.x = this.x + (this.vx * 1);
+    // this.y = this.y + (this.vy * 1);
 
     //Change direction / hit a boundary
     if (this.x > canvasRect.width || this.x < 0) {
@@ -216,10 +232,10 @@ Bubble.prototype = {
       }
 
       //Reduce velocity
-      var currentDirectionX = (this.vx > 0) ? 1 : -1;
-      this.vx = Math.abs(this.vx) * 0.60; //Reduce velocity
-      this.vx = (this.vx < 1) ? 1 : this.vx;
-      this.vx = (currentDirectionX * -1) * this.vx;
+      // var currentDirectionX = (this.vx > 0) ? 1 : -1;
+      // this.vx = Math.abs(this.vx) * 0.60; //Reduce velocity
+      // this.vx = (this.vx < 1) ? 1 : this.vx;
+      // this.vx = (currentDirectionX * -1) * this.vx;
     }
 
     if (this.y > canvasRect.height || this.y < 0) {
@@ -229,10 +245,10 @@ Bubble.prototype = {
         this.y = canvasRect.height;
       }
 
-      var currentDirectionY = (this.vy > 0) ? 1 : -1;
-      this.vy = Math.abs(this.vy) * 0.60; //Reduce velocity
-      this.vy = (this.vy < 1) ? 1 : this.vy;
-      this.vy = (currentDirectionY * -1) * this.vy;
+      // var currentDirectionY = (this.vy > 0) ? 1 : -1;
+      // this.vy = Math.abs(this.vy) * 0.60; //Reduce velocity
+      // this.vy = (this.vy < 1) ? 1 : this.vy;
+      // this.vy = (currentDirectionY * -1) * this.vy;
     }
   }
 }

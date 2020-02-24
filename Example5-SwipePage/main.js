@@ -42,6 +42,7 @@ function pageChanger(){
   Calls pageChanger method.
 */
 activeRegion.bind(touchArea, swipe, function(event){
+  console.log(event.detail.data[0].currentDirection);
     if((315 <= event.detail.data[0].currentDirection && event.detail.data[0].currentDirection <= 360) || (0 <= event.detail.data[0].currentDirection && event.detail.data[0].currentDirection <= 45)){
       if(pageCounter >= 1){
         pageCounter--;
