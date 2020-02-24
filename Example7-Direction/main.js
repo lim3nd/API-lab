@@ -3,6 +3,7 @@
 
 
 var NUM_BUBBLES = 1;
+var direction = 0;
 
 var canvas = document.createElement('canvas');
 var canvasPicker = document.createElement('canvas');
@@ -95,6 +96,8 @@ canvasRegion.bind(canvas, customPan, function(e) {
     ['distanceFromOrigin', Math.floor(e.detail.data[0].distanceFromOrigin) + "px"]
   ]);
 
+  direction = e.detail.data[0].currentDirection;
+
   var originalEvent = e.detail.events[0].originalEvent;
   var canvas = document.getElementById('main-canvas');
   var canvasRect = canvas.getBoundingClientRect();
@@ -173,18 +176,9 @@ Bubble.prototype = {
         context.fillStyle = 'rgba(' + color + ',1)';
         context.strokeStyle = 'rgba(' + color + ',1)';
 
-        // var multiplier = 100;
-        //
-        // console.log("width %: " + _this.x/canvas.width*multiplier);
-        // document.body.style.backgroundColor = "white";
-        // var perc = "0." + Math.round(_this.x/canvas.width*multiplier);
-        // if(_this.x/canvas.width*multiplier<9.5) {
-        //   perc= perc/10;
-        // }
-        // //console.log("perc: " + perc);
-        // document.getElementById('container').style.backgroundColor = "black";
-        //document.getElementById('container').style.opacity = 1-perc;
-        ctx.drawImage(image,_this.x,_this.y);
+        drawImage(ctx, image, _this.x,_this.y, image.width, image.height , 90-direction);
+        //console.log("direction: " + direction );
+
       } else {
         var color = arr.join(',');
         context.beginPath();
@@ -293,4 +287,13 @@ function setOutput(data){
   }
   var output = document.getElementById('output');
   output.innerHTML = outputStr;
+}
+
+function drawImage(ctx, image, x, y, w, h, degrees){
+  ctx.save();
+  ctx.translate(x+w/2, y+h/2);
+  ctx.rotate(degrees*Math.PI/180);
+  ctx.translate(-x-w/2, -y-h/2);
+  ctx.drawImage(image, x, y, w, h);
+  ctx.restore();
 }

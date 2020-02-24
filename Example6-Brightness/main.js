@@ -169,17 +169,10 @@ Bubble.prototype = {
         context.fillStyle = 'rgba(' + color + ',1)';
         context.strokeStyle = 'rgba(' + color + ',1)';
 
-        var multiplier = 100;
 
-        console.log("width %: " + _this.x/canvas.width*multiplier);
-        document.body.style.backgroundColor = "white";
-        var perc = "0." + Math.round(_this.x/canvas.width*multiplier);
-        if(_this.x/canvas.width*multiplier<9.5) {
-          perc= perc/10;
-        }
-        //console.log("perc: " + perc);
-        document.getElementById('container').style.backgroundColor = "black";
-        document.getElementById('container').style.opacity = 1-perc;
+        // Sets brightness
+        applyBrightness(_this.x, "blue", "black");
+
       } else {
         var color = arr.join(',');
         context.beginPath();
@@ -288,4 +281,17 @@ function setOutput(data){
   }
   var output = document.getElementById('output');
   output.innerHTML = outputStr;
+}
+
+function applyBrightness(x, bgColor, frontColor) {
+var multiplier = 100;
+//console.log("width %: " + x/canvas.width*multiplier);
+document.body.style.backgroundColor = bgColor;
+var perc = "0." + Math.round(x/canvas.width*multiplier);
+if(x/canvas.width*multiplier<9.5) {
+  perc= perc/10;
+}
+//console.log("perc: " + perc);
+document.getElementById('container').style.backgroundColor = frontColor;
+document.getElementById('container').style.opacity = 1-perc;
 }
