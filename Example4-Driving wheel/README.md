@@ -1,6 +1,6 @@
-# Rotation gesture
+# Driving wheel example
 
-## library used
+## Library used
 
 ZingTouch a gesture library helps the user to handle nice gestures with very few lines of code. Swipe, drag and drop, tap, pan, pinch and Rotate [See more](https://zingchart.github.io/zingtouch/#gestures).
 
