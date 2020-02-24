@@ -66,7 +66,7 @@ let currentRotateEventAngle = 0;
 
 I was excited about the "rotate" gesture and decided to utilize it to create at first a driving wheel prototype.
 
-the rotation is a ideal interaction in a lot of scenarios in the real world especially the ones that require a precision and micro steps adjustment. For instance, let's say we are designing a user interface for a 3D printer to adjust with head's position in very precise steps. This can be achieved by leveraging the infinite scale of rotate gesture instead of a slide gesture that has a limited scale.
+the rotation is an ideal interaction in a lot of scenarios in the real world especially where it requires a precision and micro steps adjustment. For instance, let's say we are designing a user interface for a 3D printer to adjust the head's position in very precise steps. This can be achieved by leveraging the infinite scale of rotate gesture instead of a slide gesture that has a limited scale.
 
 ---
 
