@@ -9,6 +9,8 @@ region.bind(
  
   rotatableElement, "rotate", function(e) {
 
+    if (condition) {
+
     console.log(e.detail);
 
     const rotateEventAngle = e.detail.angle;
@@ -75,7 +77,9 @@ region.bind(
       circle.style.backgroundColor = "#FE2712";
     }
 
-  },
+  }
+
+},
 
   false
 
