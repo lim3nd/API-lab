@@ -110,10 +110,10 @@ activeRegion.bind(touchArea, pan, function (event){
 }, false);
 
 /*
-  When the container is clicked and the dragable object is clicked,
+  When the container is tapped and the dragable object is hidden,
   the object will be visible again and resetted to its orignial postion
 */
-dropArea.addEventListener("click", function(event){  
+activeRegion.bind(dropArea, "tap", function(event){  
   if((objectX() >= destX) && (objectY() <= (destX + destWidth)) && (objectY() >= destY) && (objectY()) <= (destY+destHeight)){
     console.log(originalPosX + " " + originalPosY);
     childElement1.style.left = (originalPosX/2) + "px";
@@ -130,13 +130,11 @@ dropArea.addEventListener("click", function(event){
 });
 
 /*
-  As the pan motion does not inclued a varible to know when the motion is over,
-  a mouse-up function is added to know check when the motion wether the motion is over.
   When the motion is over, the position of the dragable object is checked.
   If it is in the container it will be hidden. If it is not, it will return to the original postion.
 */
-touchArea.addEventListener("mouseup", function(event){
-  childElement1.style.borderColor = "rgb(146, 148, 165)";
+pan.end = function(){
+  childElement1.style.borderColor = "rgb(148, 164, 228)";
   if(checkPos() === true){      
     childElement1.style.visibility = "hidden";
     slot1 = true;
@@ -149,4 +147,4 @@ touchArea.addEventListener("mouseup", function(event){
     x = 0;
     y = 0;
   }
-});
+};
