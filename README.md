@@ -48,12 +48,12 @@ However, some functions are useful. For example:
 
 ## Who maintains and contributes to the project
 
-* Agustin Guerrero
-* Christian Golcic
+* Agustin Guerrero: Example 9 - Color Wheel, Example10 - Volume
+* Christian Golcic: Example6 - Brightness, Example7 - Direction
 * Emil Nilsson Delborg: Example2 - Drag & Drop, Example5 - Swiping through pages
-* Ivar Lundin
-* Jaeger Ehrenbeck
-* Rasha Ahmed
+* Ivar Lundin: Example1 - Map Pin, Example 3 - Slide to Unlock
+* Jaeger Ehrenbeck: Example8 - Hue Saturation Changer, Example11 - Egg Timer
+* Rasha Ahmed: Example4 - Driving Wheel, Example12 - Bulb
 
 (insert ZingTouch contributers here) https://zingchart.github.io/zingtouch
 
