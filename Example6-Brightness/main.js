@@ -1,7 +1,7 @@
 // create a region of which zingtouch can be used - in this case the whole body of the html-document
 
 
-var NUM_BUBBLES = 10;
+var NUM_BUBBLES = 1;
 
 var canvas = document.createElement('canvas');
 var canvasPicker = document.createElement('canvas');
@@ -41,22 +41,23 @@ var canvasRegion = new ZingTouch.Region(document.getElementById('container'));
 canvasRegion.bind(canvas, 'swipe', function(e) {
   var weight = 1.5;
 
-  setOutput([
-    ['Gesture', 'Swipe'],
-    ['velocity', Math.floor(e.detail.data[0].velocity) + "px/ms"],
-    ['currentDirection', Math.floor(e.detail.data[0].currentDirection) + "°"]
-  ]);
+  // setOutput([
+  //   ['Gesture', 'Swipe'],
+  //   ['velocity', Math.floor(e.detail.data[0].velocity) + "px/ms"],
+  //   ['currentDirection', Math.floor(e.detail.data[0].currentDirection) + "°"]
+  // ]);
 
   var canvas = document.getElementById('main-canvas');
   var canvasRect = canvas.getBoundingClientRect();
   var x = e.detail.events[0].x - canvasRect.left;
   var y = e.detail.events[0].y - canvasRect.top;
 
-  bubbles[lastIndex].x = (x < 0) ? 0 : (x > canvasRect.width) ? canvasRect.width : x;
-  bubbles[lastIndex].y = (y < 0) ? 0 : (y > canvasRect.height) ? canvasRect.height : y;
+  // not needed? /CG
+  // bubbles[lastIndex].x = (x < 0) ? 0 : (x > canvasRect.width) ? canvasRect.width : x;
+  // bubbles[lastIndex].y = (y < 0) ? 0 : (y > canvasRect.height) ? canvasRect.height : y;
   var theta = Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
-  bubbles[lastIndex].vy = -1 * (2 * (e.detail.data[0].velocity * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection)));
-  bubbles[lastIndex].vx = 2 * (e.detail.data[0].velocity * Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection));
+  bubbles[lastIndex].vy = 0*-1 * (2 * (e.detail.data[0].velocity * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection)));
+  bubbles[lastIndex].vx = 0*2 * (e.detail.data[0].velocity * Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection));
 });
 
 //PANNING
@@ -79,6 +80,9 @@ customPan.start = function(inputs) {
 
   return startPan.call(this, inputs);
 }
+// setup done ... /CG
+
+// moves the object /CG
 canvasRegion.bind(canvas, customPan, function(e) {
   setOutput([
     ['Gesture', 'Pan'],
@@ -99,8 +103,8 @@ canvasRegion.bind(canvas, customPan, function(e) {
   bubbles[currentIndex].y = (y < 0) ? 0 : (y > rect.height) ? rect.height : y;
 
   //Change velocity.
-  bubbles[currentIndex].vy = -1 * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
-  bubbles[currentIndex].vx = Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection);
+  //bubbles[currentIndex].vy = -1 * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
+  //bubbles[currentIndex].vx = Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection);
 });
 
 var endPan = customPan.end;
@@ -134,7 +138,7 @@ var Bubble = function() {
   this.maxRadius = 50;
   this.stopped = false;
   this.grow = true;
-  this.color = 'rgba(' + getRandNum(0, 10) + ',' + getRandNum(0, 250) + ',' + getRandNum(100, 255) + ',' + 0.6 + ')';
+  this.color = 'rgba(' + getRandNum(0, 10) + ',' + getRandNum(0, 250) + ',' + getRandNum(100, 255) + ',' + 0.1   + ')';
   this.rate = getRandNum(0.1, 0.2, 1);
 };
 
@@ -153,12 +157,13 @@ Bubble.prototype = {
       while (arr.length < 3) {
         arr.unshift("0");
       }
-      if (picker) {
+      if (picker) { // what is picker?
         var color = arr.join(',');
         context.beginPath();
         context.arc(_this.x, _this.y, _this.radius, 0, 2 * Math.PI);
         context.fillStyle = 'rgba(' + color + ',1)';
         context.strokeStyle = 'rgba(' + color + ',1)';
+        console.log("width %: " + _this.x/canvas.width*100);
       } else {
         var color = arr.join(',');
         context.beginPath();
@@ -168,7 +173,7 @@ Bubble.prototype = {
       }
 
       context.fill();
-      context.stroke();
+      context.stroke(); // stroke when clicking/tapping
     }
 
   },
