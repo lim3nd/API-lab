@@ -2,7 +2,7 @@
 This prototype showcases pan gesture of the ZingTouch library. In this example the pan gesture is used to move a pin over a map.
 
 ## How to use
-Simply drag the pin around the map using the cursor. The pan gestures is tracking the cursors position whenever the pin is pressed, positioning the pin where the user chooses.
+Simply drag the pin around the map using the cursor. The pan gesture is tracking the cursors position whenever the pin is pressed, positioning the pin where the user chooses.
 
 ## Maintenance and contribution to the project
 This prototype was made with the help of Zingtouch: https://zingchart.github.io/zingtouch
