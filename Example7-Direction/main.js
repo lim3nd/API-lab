@@ -1,7 +1,9 @@
+
 // create a region of which zingtouch can be used - in this case the whole body of the html-document
 
 
 var NUM_BUBBLES = 1;
+var direction = 0;
 
 var canvas = document.createElement('canvas');
 var canvasPicker = document.createElement('canvas');
@@ -19,6 +21,9 @@ container.appendChild(canvasPicker);
 var bBox = container.getBoundingClientRect();
 canvas.width = canvasPicker.width = bBox.width;
 canvas.height = canvasPicker.height = bBox.height;
+
+image = new Image();
+image.src = "arrow.png";
 
 window.onresize = function(){
   console.log('fire');
@@ -90,6 +95,8 @@ canvasRegion.bind(canvas, customPan, function(e) {
     ['directionFromOrigin', Math.floor(e.detail.data[0].directionFromOrigin) + "°"],
     ['distanceFromOrigin', Math.floor(e.detail.data[0].distanceFromOrigin) + "px"]
   ]);
+
+  direction = e.detail.data[0].currentDirection;
 
   var originalEvent = e.detail.events[0].originalEvent;
   var canvas = document.getElementById('main-canvas');
@@ -169,16 +176,15 @@ Bubble.prototype = {
         context.fillStyle = 'rgba(' + color + ',1)';
         context.strokeStyle = 'rgba(' + color + ',1)';
 
-
-        // Sets brightness
-        applyBrightness(_this.x, "blue", "black");
+        drawImage(ctx, image, _this.x,_this.y, image.width, image.height , 90-direction);
+        //console.log("direction: " + direction );
 
       } else {
         var color = arr.join(',');
         context.beginPath();
         context.arc(_this.x, _this.y, _this.radius, 0, 2 * Math.PI);
         context.fillStyle = _this.color;
-        context.strokeStyle = (_this.stopped) ? 'rgba(0,0,0,0.5)' : _this.color;
+        context.strokeStyle = (_this.stopped) ? 'rgba(0,0,0,0.0)' : _this.color;
       }
 
       context.fill();
@@ -283,15 +289,11 @@ function setOutput(data){
   output.innerHTML = outputStr;
 }
 
-function applyBrightness(x, bgColor, frontColor) {
-var multiplier = 100;
-//console.log("width %: " + x/canvas.width*multiplier);
-document.body.style.backgroundColor = bgColor;
-var perc = "0." + Math.round(x/canvas.width*multiplier);
-if(x/canvas.width*multiplier<9.5) {
-  perc= perc/10;
-}
-//console.log("perc: " + perc);
-document.getElementById('container').style.backgroundColor = frontColor;
-document.getElementById('container').style.opacity = 1-perc;
+function drawImage(ctx, image, x, y, w, h, degrees){
+  ctx.save();
+  ctx.translate(x+w/2, y+h/2);
+  ctx.rotate(degrees*Math.PI/180);
+  ctx.translate(-x-w/2, -y-h/2);
+  ctx.drawImage(image, x, y, w, h);
+  ctx.restore();
 }
