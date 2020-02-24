@@ -13,25 +13,55 @@ body {
 
 }
 
-.volume {
+#volume-bar {
 
     position: absolute;
     text-align: center;
     font-size: 30px;
-    width: 60px;
+    width: 20px;
     height: 40px;
     margin-left: 10px;
+    margin-top: 10px;
     background-color: rgb(0, 183, 255);
 
 }
 
-.volume-box {
+#volume-box {
     
-    display: inline-flex;
+    position: fixed;
     align-items: center;
-    width: 500px;
+    width: 1040px;
     height: 60px;
     background-color: rgb(206, 206, 206);
+
+}
+
+#volume-counter {
+
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 30px;
+
+}
+
+#volume-symbol-high {
+
+    position: absolute;
+    justify-content: center;
+    margin-left: 1100px;
+    font-size: 40px;
+
+}
+
+#volume-symbol-low {
+
+    position: absolute;
+    justify-content: center;
+    margin-right: 1090px;
+    font-size: 40px;
 
 }
 

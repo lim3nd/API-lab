@@ -1,3 +1,4 @@
+
 // create a region of which zingtouch can be used - in this case the whole body of the html-document
 
 
@@ -19,6 +20,9 @@ container.appendChild(canvasPicker);
 var bBox = container.getBoundingClientRect();
 canvas.width = canvasPicker.width = bBox.width;
 canvas.height = canvasPicker.height = bBox.height;
+
+image = new Image();
+image.src = "arrow.png";
 
 window.onresize = function(){
   console.log('fire');
@@ -169,23 +173,24 @@ Bubble.prototype = {
         context.fillStyle = 'rgba(' + color + ',1)';
         context.strokeStyle = 'rgba(' + color + ',1)';
 
-        var multiplier = 100;
-
-        console.log("width %: " + _this.x/canvas.width*multiplier);
-        document.body.style.backgroundColor = "white";
-        var perc = "0." + Math.round(_this.x/canvas.width*multiplier);
-        if(_this.x/canvas.width*multiplier<9.5) {
-          perc= perc/10;
-        }
-        //console.log("perc: " + perc);
-        document.getElementById('container').style.backgroundColor = "black";
-        document.getElementById('container').style.opacity = 1-perc;
+        // var multiplier = 100;
+        //
+        // console.log("width %: " + _this.x/canvas.width*multiplier);
+        // document.body.style.backgroundColor = "white";
+        // var perc = "0." + Math.round(_this.x/canvas.width*multiplier);
+        // if(_this.x/canvas.width*multiplier<9.5) {
+        //   perc= perc/10;
+        // }
+        // //console.log("perc: " + perc);
+        // document.getElementById('container').style.backgroundColor = "black";
+        //document.getElementById('container').style.opacity = 1-perc;
+        ctx.drawImage(image,_this.x,_this.y);
       } else {
         var color = arr.join(',');
         context.beginPath();
         context.arc(_this.x, _this.y, _this.radius, 0, 2 * Math.PI);
         context.fillStyle = _this.color;
-        context.strokeStyle = (_this.stopped) ? 'rgba(0,0,0,0.5)' : _this.color;
+        context.strokeStyle = (_this.stopped) ? 'rgba(0,0,0,0.0)' : _this.color;
       }
 
       context.fill();

@@ -1,47 +1,58 @@
-let parent = document.getElementsByClassName("volume-box")[0];
-let slider = document.getElementByClassName("volume");
+let parent = document.getElementById("volume-box");
+let slider = document.getElementById("volume-bar");
+let counter = document.getElementById("volume-counter");
+let x=0;
 
-var region = new ZingTouch.Region(parent);
+var region = new ZingTouch.Region(document.body);
+
+let object = parent.getBoundingClientRect();
+
+function sliderPos(){
+
+    let dragObj = slider.getBoundingClientRect();
+    let sliderX = dragObj.x;
+    return sliderX;
+
+}
+
+let positionX = object.x;
+let width = object.width;
+
+var stopPositionMax = positionX + width - 30;
+var stopPositionMin = positionX + 10;
 
 setTimeout(function() {
-    document.getElementsByClassName("volume-box")[0];
+
+    document.getElementById("volume-box");
+
 }, );
  
-function moveSlider(movement) {
+region.bind(parent, "pan",function (event){
 
-    if (movement > 10 && movement < 490) {
-        slider.style.marginLeft = movement + "10px";  
+    if (sliderPos() >= stopPositionMin && sliderPos() <= stopPositionMax) {
+    
+    x += event.detail.data[0].change.x;
+    slider.style.left = `${x}px`;
 
-    } else if (movement == 0) {
+    console.log(sliderPos());
 
-        slider.style.marginLeft = movement + "10px";   
+    if (sliderPos() < stopPositionMin) {
 
-    } else if (movement >= 312) {
+        x = 0;
+        slider.style.left = `${x}px`;
 
-        slider.style.marginLeft = "312px";
+        }
         
-        setTimeout(function() {startOver()}, 1000);
+    else if (sliderPos() > stopPositionMax) {
+      
+        x = width - 40;
+        slider.style.left = `${x}px`;
+    
+        }
 
     }
-}
 
-function resetSlider() {
-
-    slider.style.marginLeft = "10px"; 
-
-}
-
-function startOver() {
-
-    document.getElementsByClassName("volume-box")[0];
-    
-    setTimeout(function() {
-        location.reload();
-    }, 1500);
-    
-}
-
-region.bind(parent, 'swipe', function(e){
-    console.log(e.target.offsetLeft);
- 
 }, false);
+
+
+
