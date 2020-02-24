@@ -1,0 +1,25 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+}
+img {
+  max-width: 100%;
+}
+.knob,
+.bulb {
+  flex: 1;
+  min-width: 300px;
+}
+.knob {
+  display: flex;
+  justify-content: center;
+}
+.knob img {
+  max-width: 120px;
+  max-height: 120px;
+}

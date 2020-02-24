@@ -20,12 +20,3 @@ region.bind(target, 'rotate', function(e) {
 
 });
 
-function setOutput(data) {
-  var outputStr = "> ";
-  for (var i = 0; i < data.length; i++) {
-    outputStr += data[i][0] + ": " + data[i][1] + ((i === data.length - 1) ? '' : ' , ');
-  }
-  var output = document.getElementById('output');
-  output.innerHTML = outputStr;
-}
-Resources

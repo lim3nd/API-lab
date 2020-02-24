@@ -5,7 +5,7 @@ body {
     align-items: center;
     justify-content: space-around;
   }
-
+ 
   #pointer {
     position: absolute;
     padding-bottom: 400px;

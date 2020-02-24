@@ -34,7 +34,6 @@ body {
   height: 100%;
   color: white;
   cursor: pointer;
-  
 }
 
 #rotatable {
@@ -46,8 +45,8 @@ body {
   width: 200px;
   height: 200px;
   font-size: 2rem;
-background: linear-gradient(to left, #58d4fa , #ffbc5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-border-radius: 30px;
+background: rgb(210, 210, 210); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+border-radius: 100px;
 
 }
 #interaction {
