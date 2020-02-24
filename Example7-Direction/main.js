@@ -177,7 +177,7 @@ Bubble.prototype = {
         context.strokeStyle = 'rgba(' + color + ',1)';
 
         drawImage(ctx, image, _this.x,_this.y, image.width, image.height , 90-direction);
-        console.log("direction: " + direction );
+        //console.log("direction: " + direction );
 
       } else {
         var color = arr.join(',');
