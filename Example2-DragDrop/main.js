@@ -136,7 +136,7 @@ dropArea.addEventListener("click", function(event){
   If it is in the container it will be hidden. If it is not, it will return to the original postion.
 */
 touchArea.addEventListener("mouseup", function(event){
-  childElement1.style.borderColor = "rgb(146, 148, 165)";
+  childElement1.style.borderColor = "rgb(148, 164, 228)";
   if(checkPos() === true){      
     childElement1.style.visibility = "hidden";
     slot1 = true;
