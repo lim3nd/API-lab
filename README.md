@@ -48,12 +48,12 @@ However, some functions are useful. For example:
 
 ## Who maintains and contributes to the project
 
-Agustin Guerrero
-Christian Golcic
-Emil Nilsson Delborg
-Ivar Lundin
-Jaeger Ehrenbeck
-Rasha Ahmed
+* Agustin Guerrero
+* Christian Golcic
+* Emil Nilsson Delborg - Example 2 - Drag & Drop, Exmaple 5 - Swiping through pages
+* Ivar Lundin
+* Jaeger Ehrenbeck
+* Rasha Ahmed
 
 (insert ZingTouch contributers here) https://zingchart.github.io/zingtouch
 
