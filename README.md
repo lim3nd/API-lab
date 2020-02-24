@@ -43,7 +43,8 @@ However, some functions are useful. For example:
 
 
 ## How users can get started with the project
-
+Users can download this repository and start using our prototypes immediately.
+Requires https://zingchart.github.io/zingtouch.
 
 
 ## Who maintains and contributes to the project
