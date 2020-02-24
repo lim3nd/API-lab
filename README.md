@@ -2,22 +2,44 @@
 
 ## 1. What the project does
 
-This project explores the ZingTouch library by implementing its uses in 12 implementation prototypes.
+During the lenght of this project we explored the full lenght of the JavaScript library called ZingTouch.
 ZingTouch includes 5 premade touch-motions:
 * Tap
 * Swipe
-* Distance
 * Pan
 * Rotate
+* Distance
 
 It also includes the ability to create custom motions.
 
-The prototypes explores the various motions and their user values.
-
-
+With these motions we have created 12 implementation prototypes that uses one of the motions each.
 
 ## 2. Why the project is useful
 
+The project explores the motions of the library by trying to create examples with user value.
+It also tries to test the usefulness of the library when prototyping for design.
+
+While exploring and trying to implement the library we noticed that you are still required to complement the code.
+So, using this as a prototyping tool is not optimal as it requires equal effort compared to using no library at all.
+However, some functions are useful. For example:
+
+* Tap
+** Pros: Easy addition of another input to trigger the event
+** Cons: Works as a normal mouse-click, dubble input only works on touch screens
+
+* Swipe
+** Pros: Includes the use of velocity
+** Cons: Not easier to implement than already existing mouse events
+
+* Pan
+** Pros: change.x, change.y are nice tools
+** Cons: When gesture exits a touch area there is no “end” event, complicated to use
+
+* Rotate
+** Pros: Easy implementation on touchscreens, the angle parameter is precise 
+** Cons: Rotation can not be attached to the object, only the mouse
+
+* Distance - Requires multiple inputs, so we have not experimented with it.
 
 
 ## 3. How users can get started with the project
