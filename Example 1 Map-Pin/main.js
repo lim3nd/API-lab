@@ -51,6 +51,9 @@ region.bind(parent, 'pan', function(e){
     let xPos = e.detail.events[0].x;        //Extract the coordinates
     let yPos = e.detail.events[0].y;
 
+    xPos = xPos - 25;   //Center pin
+    yPos = yPos - 25;
+
     //Move the pin with new coordinates
     movePin(xPos, yPos);
 })
