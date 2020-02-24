@@ -55,7 +55,7 @@ Ivar Lundin
 Jaeger Ehrenbeck
 Rasha Ahmed
 
-(insert ZingTouch contributers here)
+(insert ZingTouch contributers here) https://zingchart.github.io/zingtouch
 
 ## 5. Where users can get help with your project
 
