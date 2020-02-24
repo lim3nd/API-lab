@@ -50,7 +50,7 @@ However, some functions are useful. For example:
 
 * Agustin Guerrero
 * Christian Golcic
-* Emil Nilsson Delborg: Example 2 - Drag & Drop, Exmaple 5 - Swiping through pages
+* Emil Nilsson Delborg: Example2 - Drag & Drop, Example5 - Swiping through pages
 * Ivar Lundin
 * Jaeger Ehrenbeck
 * Rasha Ahmed
