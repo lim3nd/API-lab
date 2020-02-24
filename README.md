@@ -1,6 +1,6 @@
 # Exploring ZingTouch through Prototypes
 
-## 1. What the project does
+## What the project does
 
 During the lenght of this project we explored the full lenght of the JavaScript library called ZingTouch.
 ZingTouch includes 5 premade touch-motions:
@@ -14,7 +14,7 @@ It also includes the ability to create custom motions.
 
 With these motions we have created 12 implementation prototypes that uses one of the motions each.
 
-## 2. Why the project is useful
+## Why the project is useful
 
 The project explores the motions of the library by trying to create examples with user value.
 It also tries to test the usefulness of the library when prototyping for design.
@@ -42,11 +42,11 @@ However, some functions are useful. For example:
 * Distance - Requires multiple inputs, so we have not experimented with it.
 
 
-## 3. How users can get started with the project
+## How users can get started with the project
 
 
 
-## 4. Who maintains and contributes to the project
+## Who maintains and contributes to the project
 
 Agustin Guerrero
 Christian Golcic
@@ -57,6 +57,6 @@ Rasha Ahmed
 
 (insert ZingTouch contributers here) https://zingchart.github.io/zingtouch
 
-## 5. Where users can get help with your project
+## Where users can get help with your project
 
 N/A
