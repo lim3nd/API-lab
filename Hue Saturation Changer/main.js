@@ -6,10 +6,12 @@ document.getElementById('rotatable').style.transform = 'rotate(15deg)';
 var target = document.getElementById('interaction');
 var region = new ZingTouch.Region(target);
 
+//Variable declarations for the 3 aspects of the saturation changer.
 let hue = 0;
 let saturation = 0;
 let light = 0;
 
+//Allows cycling between the three aspects of the saturation changer.
 let btnState = 0;
 document.getElementById("rotate-container").addEventListener('click', function() {
   if (btnState == 3) {
@@ -18,6 +20,7 @@ document.getElementById("rotate-container").addEventListener('click', function()
   btnState++;
 }, false);
 
+//variable declarations for indicator text using the DOM.
 let selectorText = document.getElementById("selector");
 let indicatorText = document.getElementById("indicator");
 
