@@ -3,12 +3,12 @@
 ## 1. What the project does
 
 This project explores the ZingTouch library by implementing its uses in 12 implementation prototypes.
-ZingTOuch includes 5 premade touch-motions:
-Tap
-Swipe
-Distance
-Pan
-Rotate
+ZingTouch includes 5 premade touch-motions:
+* Tap
+* Swipe
+* Distance
+* Pan
+* Rotate
 
 It also includes the ability to create custom motions.
 
