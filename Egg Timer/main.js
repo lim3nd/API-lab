@@ -12,16 +12,14 @@ region.bind(target, 'rotate', function(e) {
   var rotatable = document.getElementById('rotatable');
   currentAngle += e.detail.distanceFromLast;
   rotatable.style.transform = 'rotate(' + currentAngle + 'deg)';
-
-  
-
 });
 
+//allows timer to be set by degree of rotation + displays message
 function setTimer(){
-  var numSeconds = (Math.abs(angle) % 360)/360 * 60;
+  var numSeconds = (Math.abs(currentAngle) % 360)/360 * 60;
   window.setTimeout(displayAlert, numSeconds * 1000)
 }
 
 function displayAlert(){
-  alert("Eggs are ready!")
+  alert("Egg(s) are ready!")
 }
