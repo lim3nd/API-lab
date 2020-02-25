@@ -16,7 +16,6 @@
 }
 #child {
     position: relative; 
-    transition: all 0.1s;
 }  
 
 #debug {
