@@ -38,8 +38,8 @@ myRotateElement.style.setProperty("transform", `rotate(${-angle}deg)`);
 
 ### Challenges
 
-The library is good, smooth and responsive to use, however, I noticed couple of things are not included right out of the box. For example,
-I needed to know the direction of rotation gesture to steer the car to left or right,however, the event does not give this information, so I had to create a custom logic to keep a track on direction of the rotation(clockwise/anti-clockwise).
+The library is good, smooth and responsive to use in rotation gesture, however, I noticed couple of things are not included right out of the box. For example,
+I needed to know the direction of rotation gesture to steer the car to left or right. Since the event does not give this information,I had to create a customed logic to keep a track on rotation's direction(clockwise/anti-clockwise).
 
 ```Javascript
 if (rotateEventAngle > currentRotateEventAngle) {
