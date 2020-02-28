@@ -32,8 +32,8 @@ However, some functions are useful. For example:
 	* Cons: Not easier to implement than already existing mouse events
 
 * Pan
-	* Pros: change.x, change.y are nice tools
-	* Cons: When gesture exits a touch area there is no “end” event, complicated to use
+	* Pros: The "distanceFromOrigin" data from the event.
+	* Cons: When gesture exits a touch area there is no “end” event.
 
 * Rotate
 	* Pros: Easy implementation on touchscreens, the angle parameter is precise 
