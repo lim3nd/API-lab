@@ -12,4 +12,4 @@ https://zingchart.github.io/zingtouch
 "A modern JavaScript touch gesture library. The library allows developers to configure pre-existing gestures as well as create their own using ZingTouch's life cycle.""
 
 ## Who is responsible
-Christian Golcic made this prototype
+Christian Golcic made this prototype. It is slightly based on the Bubble example (ZingTouch's), but heavily modified. The part from the example that is still present is the code used for the swipe. The rest of the functionality is made by Christian.

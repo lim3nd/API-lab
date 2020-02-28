@@ -1,8 +1,3 @@
-
-// create a region of which zingtouch can be used - in this case the whole body of the html-document
-
-
-var NUM_BUBBLES = 1;
 var direction = 0;
 
 var canvas = document.createElement('canvas');
@@ -13,7 +8,6 @@ canvasPicker.style.visibility = "hidden";
 canvasPicker.style.visibility = "hidden";
 canvasPicker.style.position = 'fixed';
 
-var bubbles = [];
 var container = document.getElementById('container');
 container.appendChild(canvas);
 container.appendChild(canvasPicker);
@@ -46,23 +40,10 @@ var canvasRegion = new ZingTouch.Region(document.getElementById('container'));
 canvasRegion.bind(canvas, 'swipe', function(e) {
   var weight = 1.5;
 
-  // setOutput([
-  //   ['Gesture', 'Swipe'],
-  //   ['velocity', Math.floor(e.detail.data[0].velocity) + "px/ms"],
-  //   ['currentDirection', Math.floor(e.detail.data[0].currentDirection) + "°"]
-  // ]);
-
   var canvas = document.getElementById('main-canvas');
   var canvasRect = canvas.getBoundingClientRect();
   var x = e.detail.events[0].x - canvasRect.left;
   var y = e.detail.events[0].y - canvasRect.top;
-
-  // not needed? /CG
-  // bubbles[lastIndex].x = (x < 0) ? 0 : (x > canvasRect.width) ? canvasRect.width : x;
-  // bubbles[lastIndex].y = (y < 0) ? 0 : (y > canvasRect.height) ? canvasRect.height : y;
-  // var theta = Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
-  // bubbles[lastIndex].vy = 0*-1 * (2 * (e.detail.data[0].velocity * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection)));
-  // bubbles[lastIndex].vx = 0*2 * (e.detail.data[0].velocity * Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection));
 });
 
 //PANNING
@@ -80,7 +61,7 @@ customPan.start = function(inputs) {
   var y = inputs[0].current.y - canvasRect.top;
   currentIndex = getIndex(x, y);
   if (currentIndex !== null) {
-    bubbles[currentIndex].stopped = true;
+    point.stopped = true;
   }
 
   return startPan.call(this, inputs);
@@ -106,17 +87,13 @@ canvasRegion.bind(canvas, customPan, function(e) {
   var y = e.detail.events[0].y - canvasRect.top;
 
   var rect = canvas.getBoundingClientRect();
-  bubbles[currentIndex].x = (x < 0) ? 0 : (x > rect.width) ? rect.width : x;
-  bubbles[currentIndex].y = (y < 0) ? 0 : (y > rect.height) ? rect.height : y;
-
-  //Change velocity.
-  //bubbles[currentIndex].vy = -1 * Math.sin((Math.PI / 180) * e.detail.data[0].currentDirection);
-  //bubbles[currentIndex].vx = Math.cos((Math.PI / 180) * e.detail.data[0].currentDirection);
+  point.x = (x < 0) ? 0 : (x > rect.width) ? rect.width : x;
+  point.y = (y < 0) ? 0 : (y > rect.height) ? rect.height : y;
 });
 
 var endPan = customPan.end;
 customPan.end = function(inputs) {
-  bubbles[currentIndex].stopped = false;
+  point.stopped = false;
   lastIndex = currentIndex;
   currentIndex = null;
   return endPan.call(this, inputs);
@@ -130,8 +107,6 @@ function getIndex(x, y) {
 
   var ctx = canvas.getContext("2d");
 
-
-
   var colors = ctx.getImageData(x, y, 1, 1).data;
   var str = "";
   for (var i = 0; i < colors.length - 1; i++) {
@@ -140,7 +115,7 @@ function getIndex(x, y) {
   return parseInt(str);
 }
 
-var Bubble = function() {
+var Point = function() {
   this.x = getRandNum(0, canvas.width);
   this.y = getRandNum(0, canvas.height);
   this.vx = getRandNum(-1, 1, 2);
@@ -154,7 +129,7 @@ var Bubble = function() {
   this.rate = getRandNum(0.1, 0.2, 1);
 };
 
-Bubble.prototype = {
+Point.prototype = {
   render: function(id) {
     var canvas = document.getElementById('main-canvas');
     var canvasPicker = document.getElementById('picker-canvas');
@@ -186,7 +161,6 @@ Bubble.prototype = {
         context.fillStyle = _this.color;
         context.strokeStyle = (_this.stopped) ? 'rgba(0,0,0,0.0)' : _this.color;
       }
-
       context.fill();
       context.stroke(); // stroke when clicking/tapping
     }
@@ -197,24 +171,6 @@ Bubble.prototype = {
     if (this.stopped) {
       return;
     }
-    //
-    //                // //RADIUS
-    //                if (this.grow) {
-    //                    if (this.radius < this.maxRadius) {
-    //                        this.radius = this.rate + this.radius;
-    //                    } else {
-    //                        this.grow = false;
-    //                        this.radius = this.radius - this.rate;
-    //                    }
-    //                } else {
-    //                    if (this.radius > this.minRadius) {
-    //                        this.radius = this.radius - this.rate;
-    //                    } else {
-    //                        this.grow = true;
-    //                        this.radius = this.rate + this.radius;
-    //                    }
-    //                }
-    //                this.radius = parseFloat(this.radius);
 
     //MOVEMENT
     var canvas = document.getElementById('main-canvas');
@@ -229,12 +185,6 @@ Bubble.prototype = {
       } else {
         this.x = canvasRect.width;
       }
-
-      //Reduce velocity
-      // var currentDirectionX = (this.vx > 0) ? 1 : -1;
-      // this.vx = Math.abs(this.vx) * 0.60; //Reduce velocity
-      // this.vx = (this.vx < 1) ? 1 : this.vx;
-      // this.vx = (currentDirectionX * -1) * this.vx;
     }
 
     if (this.y > canvasRect.height || this.y < 0) {
@@ -243,20 +193,13 @@ Bubble.prototype = {
       } else {
         this.y = canvasRect.height;
       }
-
-      // var currentDirectionY = (this.vy > 0) ? 1 : -1;
-      // this.vy = Math.abs(this.vy) * 0.60; //Reduce velocity
-      // this.vy = (this.vy < 1) ? 1 : this.vy;
-      // this.vy = (currentDirectionY * -1) * this.vy;
     }
   }
 }
 
-for (var i = 0; i < NUM_BUBBLES; i++) {
-  var bubble = new Bubble();
-  bubbles.push(bubble);
-  bubble.render(i);
-}
+  var point = new Point();
+  point.render(0);
+
 
 window.requestAnimationFrame(eventLoop);
 
@@ -269,10 +212,8 @@ function eventLoop(timestamp) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctxPicker.clearRect(0, 0, canvasPicker.width, canvasPicker.height);
 
-  for (var i = 0; i < bubbles.length; i++) {
-    bubbles[i].update(i);
-    bubbles[i].render(i);
-  }
+    point.update(0);
+    point.render(0);
 }
 
 function getRandNum(min, max, decimals) {
